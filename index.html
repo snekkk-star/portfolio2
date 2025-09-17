@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио монтажёра</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0d0d0d;
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      animation: fadeIn 2s ease-in;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      animation: glitch 1.5s infinite;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin: 10px 0 20px;
+      opacity: 0;
+      animation: fadeInUp 2s ease-in forwards;
+      animation-delay: 0.5s;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .project {
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+    }
+
+    .project iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+    }
+
+    .about, .contacts {
+      text-align: center;
+    }
+
+    .contacts a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background: #ff3333;
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .contacts a:hover {
+      background: #cc0000;
+      transform: scale(1.1);
+    }
+
+    /* Анимации */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red, -2px 0 blue; }
+      20% { text-shadow: -2px 0 red, 2px 0 blue; }
+      40% { text-shadow: 2px 2px red, -2px -2px blue; }
+      60% { text-shadow: -2px -2px red, 2px 2px blue; }
+      80% { text-shadow: 2px -2px red, -2px 2px blue; }
+      100% { text-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Александр — видеомонтажёр</h1>
+    <p>Создаю динамичные ролики и креативный монтаж</p>
+  </header>
+
+  <section id="portfolio">
+    <h2>Мои работы</h2>
+    <div class="portfolio-grid">
+      <div class="project">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="project">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="project">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="project">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="project">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <div class="project">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>Обо мне</h2>
+    <p>Александр — видеомонтажёр с более чем 5-летним опытом. Специализируюсь на горизонтальных видео и моушн-дизайне, также работаю с вертикальными форматами.</p>
+  </section>
+
+  <section class="contacts">
+    <h2>Контакты</h2>
+    <a href="https://t.me/username">Telegram</a>
+  </section>
+
+  <script>
+    // Плавное появление секций при скролле
+    const sections = document.querySelectorAll('section');
+    const options = { threshold: 0.2 };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
